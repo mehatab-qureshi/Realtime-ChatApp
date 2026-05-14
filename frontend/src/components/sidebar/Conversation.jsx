@@ -2,64 +2,46 @@ import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConversation";
 
 const Conversation = ({ conversation, lastIdx, emoji }) => {
-	const { selectedConversation, setSelectedConversation } = useConversation();
+  const { selectedConversation, setSelectedConversation } = useConversation();
 
-	const isSelected = selectedConversation?._id === conversation._id;
-	const { onlineUsers } = useSocketContext();
-	const isOnline = onlineUsers.includes(conversation._id);
+  const isSelected = selectedConversation?._id === conversation._id;
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
 
-	return (
-		<>
-			<div
-				className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
+  return (
+    <>
+      <div
+        className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
 				${isSelected ? "bg-sky-500" : ""}
 			`}
-				onClick={() => setSelectedConversation(conversation)}
-			>
-				<div className={`avatar ${isOnline ? "online" : ""}`}>
-					<div className='w-12 rounded-full'>
-						<img src={conversation.profilePic} alt='user avatar' />
-					</div>
-				</div>
+        onClick={() => setSelectedConversation(conversation)}
+      >
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
+          <div className="w-12 rounded-full">
+            <img
+              src={conversation.profilePic}
+              alt="user avatar"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Crect width='50' height='50' fill='%234A90D9'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='20'%3E" +
+                  conversation.fullName.charAt(0) +
+                  "%3C/text%3E%3C/svg%3E";
+              }}
+            />
+          </div>
+        </div>
 
-				<div className='flex flex-col flex-1'>
-					<div className='flex gap-3 justify-between'>
-						<p className='font-bold text-gray-200'>{conversation.fullName}</p>
-						<span className='text-xl'>{emoji}</span>
-					</div>
-				</div>
-			</div>
+        <div className="flex flex-col flex-1">
+          <div className="flex gap-3 justify-between">
+            <p className="font-bold text-gray-200">{conversation.fullName}</p>
+            <span className="text-xl">{emoji}</span>
+          </div>
+        </div>
+      </div>
 
-			{!lastIdx && <div className='divider my-0 py-0 h-1' />}
-		</>
-	);
+      {!lastIdx && <div className="divider my-0 py-0 h-1" />}
+    </>
+  );
 };
 export default Conversation;
-
-// STARTER CODE SNIPPET
-// const Conversation = () => {
-// 	return (
-// 		<>
-// 			<div className='flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer'>
-// 				<div className='avatar online'>
-// 					<div className='w-12 rounded-full'>
-// 						<img
-// 							src='https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
-// 							alt='user avatar'
-// 						/>
-// 					</div>
-// 				</div>
-
-// 				<div className='flex flex-col flex-1'>
-// 					<div className='flex gap-3 justify-between'>
-// 						<p className='font-bold text-gray-200'>John Doe</p>
-// 						<span className='text-xl'>🎃</span>
-// 					</div>
-// 				</div>
-// 			</div>
-
-// 			<div className='divider my-0 py-0 h-1' />
-// 		</>
-// 	);
-// };
-// export default Conversation;

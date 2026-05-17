@@ -1,15 +1,18 @@
-# Real-Time Chat App: MERN Chat App | JWT, Socket.io
+# Real-Time Chat Application
+A full-stack real-time chat application built using the MERN Stack and Socket.io for instant messaging and online user tracking.
+
+## 🌐 Live Demo
+👉 [Real-Time Chat App.onrender.com](https://realtime-chatapp-ubjy.onrender.com/login)
 
 Some Features:
 
 -   🌟 Tech stack: MERN + Socket.io + TailwindCSS + Daisy UI
--   🎃 Authentication && Authorization with JWT
+-   🔐 JWT Authentication & Authorization
 -   👾 Real-time messaging with Socket.io
--   🚀 Online user status (Socket.io and React Context)
+-   🟢 Online User Status Tracking
 -   👌 Global state management with Zustand
 -   🐞 Error handling both on the server and on the client
--   ⭐ At the end Deployment like a pro for FREE!
--   ⏳ And much more!
+-   ⚡ Instant Message Updates
 
 ### Setup .env file
 
